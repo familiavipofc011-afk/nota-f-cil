@@ -1,0 +1,7 @@
+project_id = "mgwqgfpecsugdcfrqruc"
+
+[functions.processar-nota]
+verify_jwt = true
+
+[functions.processar-voz]
+verify_jwt = true
