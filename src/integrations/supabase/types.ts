@@ -14,7 +14,189 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      casas: {
+        Row: {
+          cor: string | null
+          created_at: string
+          icone: string | null
+          id: string
+          nome: string
+          user_id: string
+        }
+        Insert: {
+          cor?: string | null
+          created_at?: string
+          icone?: string | null
+          id?: string
+          nome: string
+          user_id: string
+        }
+        Update: {
+          cor?: string | null
+          created_at?: string
+          icone?: string | null
+          id?: string
+          nome?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      compras: {
+        Row: {
+          casa_id: string | null
+          created_at: string
+          data_compra: string
+          estabelecimento: string | null
+          id: string
+          itens_json: Json | null
+          nota_url: string | null
+          origem: string | null
+          total: number
+          user_id: string
+        }
+        Insert: {
+          casa_id?: string | null
+          created_at?: string
+          data_compra?: string
+          estabelecimento?: string | null
+          id?: string
+          itens_json?: Json | null
+          nota_url?: string | null
+          origem?: string | null
+          total?: number
+          user_id: string
+        }
+        Update: {
+          casa_id?: string | null
+          created_at?: string
+          data_compra?: string
+          estabelecimento?: string | null
+          id?: string
+          itens_json?: Json | null
+          nota_url?: string | null
+          origem?: string | null
+          total?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "compras_casa_id_fkey"
+            columns: ["casa_id"]
+            isOneToOne: false
+            referencedRelation: "casas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      itens: {
+        Row: {
+          casa_id: string | null
+          categoria: string | null
+          created_at: string
+          id: string
+          nome: string
+          observacao: string | null
+          preco_ultimo: number | null
+          quantidade: number
+          quantidade_minima: number | null
+          unidade: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          casa_id?: string | null
+          categoria?: string | null
+          created_at?: string
+          id?: string
+          nome: string
+          observacao?: string | null
+          preco_ultimo?: number | null
+          quantidade?: number
+          quantidade_minima?: number | null
+          unidade?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          casa_id?: string | null
+          categoria?: string | null
+          created_at?: string
+          id?: string
+          nome?: string
+          observacao?: string | null
+          preco_ultimo?: number | null
+          quantidade?: number
+          quantidade_minima?: number | null
+          unidade?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "itens_casa_id_fkey"
+            columns: ["casa_id"]
+            isOneToOne: false
+            referencedRelation: "casas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lembretes: {
+        Row: {
+          concluido: boolean | null
+          created_at: string
+          data_lembrete: string
+          id: string
+          item_id: string | null
+          titulo: string
+          user_id: string
+        }
+        Insert: {
+          concluido?: boolean | null
+          created_at?: string
+          data_lembrete: string
+          id?: string
+          item_id?: string | null
+          titulo: string
+          user_id: string
+        }
+        Update: {
+          concluido?: boolean | null
+          created_at?: string
+          data_lembrete?: string
+          id?: string
+          item_id?: string | null
+          titulo?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lembretes_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "itens"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          id: string
+          nome: string | null
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          nome?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          nome?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
