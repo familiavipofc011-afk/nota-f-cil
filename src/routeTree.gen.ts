@@ -9,19 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppIndexRouteImport } from './routes/app.index'
-import { Route as AppLembretesRouteImport } from './routes/app.lembretes'
-import { Route as AppGastosRouteImport } from './routes/app.gastos'
-import { Route as AppEstoqueRouteImport } from './routes/app.estoque'
-import { Route as AppEscanearRouteImport } from './routes/app.escanear'
 import { Route as AppCasasRouteImport } from './routes/app.casas'
+import { Route as AppEscanearRouteImport } from './routes/app.escanear'
+import { Route as AppEstoqueRouteImport } from './routes/app.estoque'
+import { Route as AppGastosRouteImport } from './routes/app.gastos'
+import { Route as AppLembretesRouteImport } from './routes/app.lembretes'
+import { Route as AppRelatoriosRouteImport } from './routes/app.relatorios'
 
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppRoute = AppRouteImport.update({
@@ -29,9 +30,9 @@ const AppRoute = AppRouteImport.update({
   path: '/app',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
@@ -39,19 +40,9 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
-const AppLembretesRoute = AppLembretesRouteImport.update({
-  id: '/lembretes',
-  path: '/lembretes',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppGastosRoute = AppGastosRouteImport.update({
-  id: '/gastos',
-  path: '/gastos',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppEstoqueRoute = AppEstoqueRouteImport.update({
-  id: '/estoque',
-  path: '/estoque',
+const AppCasasRoute = AppCasasRouteImport.update({
+  id: '/casas',
+  path: '/casas',
   getParentRoute: () => AppRoute,
 } as any)
 const AppEscanearRoute = AppEscanearRouteImport.update({
@@ -59,9 +50,24 @@ const AppEscanearRoute = AppEscanearRouteImport.update({
   path: '/escanear',
   getParentRoute: () => AppRoute,
 } as any)
-const AppCasasRoute = AppCasasRouteImport.update({
-  id: '/casas',
-  path: '/casas',
+const AppEstoqueRoute = AppEstoqueRouteImport.update({
+  id: '/estoque',
+  path: '/estoque',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGastosRoute = AppGastosRouteImport.update({
+  id: '/gastos',
+  path: '/gastos',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLembretesRoute = AppLembretesRouteImport.update({
+  id: '/lembretes',
+  path: '/lembretes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRelatoriosRoute = AppRelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
   getParentRoute: () => AppRoute,
 } as any)
 
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/app/estoque': typeof AppEstoqueRoute
   '/app/gastos': typeof AppGastosRoute
   '/app/lembretes': typeof AppLembretesRoute
+  '/app/relatorios': typeof AppRelatoriosRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/app/estoque': typeof AppEstoqueRoute
   '/app/gastos': typeof AppGastosRoute
   '/app/lembretes': typeof AppLembretesRoute
+  '/app/relatorios': typeof AppRelatoriosRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/app/estoque': typeof AppEstoqueRoute
   '/app/gastos': typeof AppGastosRoute
   '/app/lembretes': typeof AppLembretesRoute
+  '/app/relatorios': typeof AppRelatoriosRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/app/estoque'
     | '/app/gastos'
     | '/app/lembretes'
+    | '/app/relatorios'
     | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/app/estoque'
     | '/app/gastos'
     | '/app/lembretes'
+    | '/app/relatorios'
     | '/app'
   id:
     | '__root__'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/app/estoque'
     | '/app/gastos'
     | '/app/lembretes'
+    | '/app/relatorios'
     | '/app/'
   fileRoutesById: FileRoutesById
 }
@@ -141,11 +153,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app': {
@@ -155,11 +167,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/': {
@@ -169,25 +181,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
-    '/app/lembretes': {
-      id: '/app/lembretes'
-      path: '/lembretes'
-      fullPath: '/app/lembretes'
-      preLoaderRoute: typeof AppLembretesRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/app/gastos': {
-      id: '/app/gastos'
-      path: '/gastos'
-      fullPath: '/app/gastos'
-      preLoaderRoute: typeof AppGastosRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/app/estoque': {
-      id: '/app/estoque'
-      path: '/estoque'
-      fullPath: '/app/estoque'
-      preLoaderRoute: typeof AppEstoqueRouteImport
+    '/app/casas': {
+      id: '/app/casas'
+      path: '/casas'
+      fullPath: '/app/casas'
+      preLoaderRoute: typeof AppCasasRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/escanear': {
@@ -197,11 +195,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppEscanearRouteImport
       parentRoute: typeof AppRoute
     }
-    '/app/casas': {
-      id: '/app/casas'
-      path: '/casas'
-      fullPath: '/app/casas'
-      preLoaderRoute: typeof AppCasasRouteImport
+    '/app/estoque': {
+      id: '/app/estoque'
+      path: '/estoque'
+      fullPath: '/app/estoque'
+      preLoaderRoute: typeof AppEstoqueRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/gastos': {
+      id: '/app/gastos'
+      path: '/gastos'
+      fullPath: '/app/gastos'
+      preLoaderRoute: typeof AppGastosRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/lembretes': {
+      id: '/app/lembretes'
+      path: '/lembretes'
+      fullPath: '/app/lembretes'
+      preLoaderRoute: typeof AppLembretesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/relatorios': {
+      id: '/app/relatorios'
+      path: '/relatorios'
+      fullPath: '/app/relatorios'
+      preLoaderRoute: typeof AppRelatoriosRouteImport
       parentRoute: typeof AppRoute
     }
   }
@@ -213,6 +232,7 @@ interface AppRouteChildren {
   AppEstoqueRoute: typeof AppEstoqueRoute
   AppGastosRoute: typeof AppGastosRoute
   AppLembretesRoute: typeof AppLembretesRoute
+  AppRelatoriosRoute: typeof AppRelatoriosRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
@@ -222,6 +242,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppEstoqueRoute: AppEstoqueRoute,
   AppGastosRoute: AppGastosRoute,
   AppLembretesRoute: AppLembretesRoute,
+  AppRelatoriosRoute: AppRelatoriosRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
