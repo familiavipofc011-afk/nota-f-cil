@@ -44,6 +44,7 @@ export type Database = {
       compras: {
         Row: {
           casa_id: string | null
+          categoria: string
           created_at: string
           data_compra: string
           estabelecimento: string | null
@@ -56,6 +57,7 @@ export type Database = {
         }
         Insert: {
           casa_id?: string | null
+          categoria?: string
           created_at?: string
           data_compra?: string
           estabelecimento?: string | null
@@ -68,6 +70,7 @@ export type Database = {
         }
         Update: {
           casa_id?: string | null
+          categoria?: string
           created_at?: string
           data_compra?: string
           estabelecimento?: string | null
