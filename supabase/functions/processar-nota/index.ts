@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: "Você extrai informações de notas fiscais brasileiras a partir de fotos. Retorne JSON via tool call. Quantidades e preços em números. Unidades comuns: un, kg, g, l, ml, pct.",
+            content: "Você extrai informações de notas fiscais brasileiras a partir de fotos. Retorne JSON via tool call. Quantidades e preços em números. Unidades comuns: un, kg, g, l, ml, pct. Classifique a compra em uma categoria: supermercado, feira, farmacia, gas, luz, agua, aluguel, transporte ou outros.",
           },
           {
             role: "user",
@@ -53,6 +53,7 @@ Deno.serve(async (req) => {
                 estabelecimento: { type: "string" },
                 total: { type: "number" },
                 data: { type: "string", description: "Data no formato YYYY-MM-DD" },
+                categoria: { type: "string", enum: ["supermercado", "feira", "farmacia", "gas", "luz", "agua", "aluguel", "transporte", "outros"], description: "Categoria do gasto" },
                 itens: {
                   type: "array",
                   items: {
@@ -94,6 +95,7 @@ Deno.serve(async (req) => {
       estabelecimento: parsed.estabelecimento ?? null,
       total: parsed.total ?? 0,
       data_compra: parsed.data ?? new Date().toISOString().slice(0, 10),
+      categoria: parsed.categoria ?? "supermercado",
       origem: "nota_fiscal",
       itens_json: parsed.itens,
     }).select().single();
