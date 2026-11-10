@@ -3,8 +3,11 @@ import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { ScanLine, Mic, Bell, Receipt, Package, House } from "lucide-react";
+import { Newsletter } from "@/components/Newsletter";
+import { pageHead } from "@/lib/metadata";
 
 export const Route = createFileRoute("/")({
+  head: () => pageHead("Casa da Mãe", "Organize casas, estoque, gastos e lembretes e participe da comunidade Família 1M."),
   component: Landing,
 });
 
@@ -85,6 +88,8 @@ function Landing() {
           </Link>
         </div>
       </section>
+      <Newsletter />
+      <footer className="px-6 py-6 text-center text-sm text-muted-foreground"><Link to="/privacidade">Privacidade</Link> · Casa da Mãe — Família 1M</footer>
     </div>
   );
 }

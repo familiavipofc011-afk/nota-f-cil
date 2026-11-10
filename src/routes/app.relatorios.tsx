@@ -5,8 +5,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChartColumn, Lightbulb, TrendingDown, PiggyBank, CalendarDays } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
 import { CATEGORIAS_GASTO, categoriaInfo } from "@/lib/categorias";
+import { pageHead } from "@/lib/metadata";
 
-export const Route = createFileRoute("/app/relatorios")({ component: Relatorios });
+export const Route = createFileRoute("/app/relatorios")({ head:()=>pageHead("Relatórios e economia", "Acompanhe os gastos da casa e explore dicas de economia."), component: Relatorios });
 
 const CHART_COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)", "var(--accent)", "var(--warning)", "var(--success)", "var(--muted-foreground)"];
 
@@ -92,7 +93,7 @@ function Relatorios() {
       <h1 className="font-display text-3xl font-bold">Relatórios & economia</h1>
       <p className="text-muted-foreground text-sm mt-1">Veja para onde vai o dinheiro e como gastar menos.</p>
 
-      <Tabs defaultValue="graficos" className="mt-6">
+      <Tabs defaultValue="graficos" className="mt-6" onValueChange={(tab) => window.__lovableEvents?.track?.("project.report_interest_selected", { tab })}>
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="graficos"><ChartColumn className="w-4 h-4 mr-2" />Gráficos gerais</TabsTrigger>
           <TabsTrigger value="dicas"><Lightbulb className="w-4 h-4 mr-2" />Dicas de economia</TabsTrigger>

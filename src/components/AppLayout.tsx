@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
-import { Home, Package, Receipt, Bell, ScanLine, LogOut, House, ChartColumn } from "lucide-react";
+import { Home, Package, Receipt, Bell, ScanLine, LogOut, House, ChartColumn, MessageCircle, Sheet, ShieldCheck } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -12,6 +12,10 @@ const nav = [
   { to: "/app/gastos", label: "Gastos", icon: Receipt },
   { to: "/app/relatorios", label: "Relatórios", icon: ChartColumn },
   { to: "/app/lembretes", label: "Lembretes", icon: Bell },
+  { to: "/app/avisos", label: "Avisos", icon: Bell },
+  { to: "/app/ajuda", label: "Economizar juntos", icon: MessageCircle },
+  { to: "/app/planilha", label: "Planilha", icon: Sheet },
+  { to: "/app/painel", label: "Painel", icon: ShieldCheck },
 ];
 
 export function AppLayout() {
@@ -65,12 +69,12 @@ export function AppLayout() {
       </main>
 
       {/* Mobile bottom nav */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-card border-t border-border z-50 flex">
+      <nav aria-label="Navegação principal" className="md:hidden fixed bottom-0 inset-x-0 bg-card border-t border-border z-50 flex overflow-x-auto">
         {nav.map(({ to, label, icon: Icon }) => {
           const active = loc.pathname === to || (to !== "/app" && loc.pathname.startsWith(to));
           return (
             <Link key={to} to={to} className={cn(
-              "flex-1 flex flex-col items-center justify-center py-2 gap-0.5 text-[10px]",
+              "min-w-20 flex-1 flex flex-col items-center justify-center py-2 gap-0.5 text-[10px]",
               active ? "text-primary font-semibold" : "text-muted-foreground"
             )}>
               <Icon className="w-5 h-5" />
