@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAjudaRouteImport } from './routes/app.ajuda'
 import { Route as AppCasasRouteImport } from './routes/app.casas'
 import { Route as AppEscanearRouteImport } from './routes/app.escanear'
 import { Route as AppEstoqueRouteImport } from './routes/app.estoque'
@@ -38,6 +39,11 @@ const LoginRoute = LoginRouteImport.update({
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAjudaRoute = AppAjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
   getParentRoute: () => AppRoute,
 } as any)
 const AppCasasRoute = AppCasasRouteImport.update({
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/app/ajuda': typeof AppAjudaRoute
   '/app/casas': typeof AppCasasRoute
   '/app/escanear': typeof AppEscanearRoute
   '/app/estoque': typeof AppEstoqueRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/app/ajuda': typeof AppAjudaRoute
   '/app/casas': typeof AppCasasRoute
   '/app/escanear': typeof AppEscanearRoute
   '/app/estoque': typeof AppEstoqueRoute
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/app/ajuda': typeof AppAjudaRoute
   '/app/casas': typeof AppCasasRoute
   '/app/escanear': typeof AppEscanearRoute
   '/app/estoque': typeof AppEstoqueRoute
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/login'
+    | '/app/ajuda'
     | '/app/casas'
     | '/app/escanear'
     | '/app/estoque'
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/app/ajuda'
     | '/app/casas'
     | '/app/escanear'
     | '/app/estoque'
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/login'
+    | '/app/ajuda'
     | '/app/casas'
     | '/app/escanear'
     | '/app/estoque'
@@ -179,6 +191,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/app/'
       preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ajuda': {
+      id: '/app/ajuda'
+      path: '/ajuda'
+      fullPath: '/app/ajuda'
+      preLoaderRoute: typeof AppAjudaRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/casas': {
@@ -227,6 +246,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAjudaRoute: typeof AppAjudaRoute
   AppCasasRoute: typeof AppCasasRoute
   AppEscanearRoute: typeof AppEscanearRoute
   AppEstoqueRoute: typeof AppEstoqueRoute
@@ -237,6 +257,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAjudaRoute: AppAjudaRoute,
   AppCasasRoute: AppCasasRoute,
   AppEscanearRoute: AppEscanearRoute,
   AppEstoqueRoute: AppEstoqueRoute,

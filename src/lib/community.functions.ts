@@ -26,7 +26,7 @@ export const exportSheet = createServerFn({ method: "POST" }).middleware([requir
       context.supabase.from("compras").select("*").eq("user_id", context.userId),
       context.supabase.from("lembretes").select("*").eq("user_id", context.userId),
     ]);
-    if (results.some(r => r.error)) throw new Error("Não foi possível ler seus registros.");
+    if (results.some((r: { error: unknown }) => r.error)) throw new Error("Não foi possível ler seus registros.");
     const [houses, items, purchases, reminders] = results;
     for (const r of houses.data ?? []) rows.push(["Casa", r.id, context.userId, r.nome, "", "", "", "", "", "", timestamp, JSON.stringify(r)]);
     for (const r of items.data ?? []) rows.push(["Estoque", r.id, context.userId, r.nome, r.casa_id, r.quantidade, r.unidade, r.preco_ultimo, r.categoria, Number(r.quantidade) <= Number(r.quantidade_minima ?? 1) ? "Acabando" : "Disponível", timestamp, JSON.stringify(r)]);
