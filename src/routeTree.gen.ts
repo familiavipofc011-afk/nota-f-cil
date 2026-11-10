@@ -12,13 +12,17 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppAjudaRouteImport } from './routes/app.ajuda'
+import { Route as AppAvisosRouteImport } from './routes/app.avisos'
 import { Route as AppCasasRouteImport } from './routes/app.casas'
 import { Route as AppEscanearRouteImport } from './routes/app.escanear'
 import { Route as AppEstoqueRouteImport } from './routes/app.estoque'
 import { Route as AppGastosRouteImport } from './routes/app.gastos'
 import { Route as AppLembretesRouteImport } from './routes/app.lembretes'
+import { Route as AppPainelRouteImport } from './routes/app.painel'
+import { Route as AppPlanilhaRouteImport } from './routes/app.planilha'
 import { Route as AppRelatoriosRouteImport } from './routes/app.relatorios'
 
 const IndexRoute = IndexRouteImport.update({
@@ -36,6 +40,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -44,6 +53,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
 const AppAjudaRoute = AppAjudaRouteImport.update({
   id: '/ajuda',
   path: '/ajuda',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAvisosRoute = AppAvisosRouteImport.update({
+  id: '/avisos',
+  path: '/avisos',
   getParentRoute: () => AppRoute,
 } as any)
 const AppCasasRoute = AppCasasRouteImport.update({
@@ -71,6 +85,16 @@ const AppLembretesRoute = AppLembretesRouteImport.update({
   path: '/lembretes',
   getParentRoute: () => AppRoute,
 } as any)
+const AppPainelRoute = AppPainelRouteImport.update({
+  id: '/painel',
+  path: '/painel',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlanilhaRoute = AppPlanilhaRouteImport.update({
+  id: '/planilha',
+  path: '/planilha',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppRelatoriosRoute = AppRelatoriosRouteImport.update({
   id: '/relatorios',
   path: '/relatorios',
@@ -81,24 +105,32 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/app/ajuda': typeof AppAjudaRoute
+  '/app/avisos': typeof AppAvisosRoute
   '/app/casas': typeof AppCasasRoute
   '/app/escanear': typeof AppEscanearRoute
   '/app/estoque': typeof AppEstoqueRoute
   '/app/gastos': typeof AppGastosRoute
   '/app/lembretes': typeof AppLembretesRoute
+  '/app/painel': typeof AppPainelRoute
+  '/app/planilha': typeof AppPlanilhaRoute
   '/app/relatorios': typeof AppRelatoriosRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/app/ajuda': typeof AppAjudaRoute
+  '/app/avisos': typeof AppAvisosRoute
   '/app/casas': typeof AppCasasRoute
   '/app/escanear': typeof AppEscanearRoute
   '/app/estoque': typeof AppEstoqueRoute
   '/app/gastos': typeof AppGastosRoute
   '/app/lembretes': typeof AppLembretesRoute
+  '/app/painel': typeof AppPainelRoute
+  '/app/planilha': typeof AppPlanilhaRoute
   '/app/relatorios': typeof AppRelatoriosRoute
   '/app': typeof AppIndexRoute
 }
@@ -107,12 +139,16 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/app/ajuda': typeof AppAjudaRoute
+  '/app/avisos': typeof AppAvisosRoute
   '/app/casas': typeof AppCasasRoute
   '/app/escanear': typeof AppEscanearRoute
   '/app/estoque': typeof AppEstoqueRoute
   '/app/gastos': typeof AppGastosRoute
   '/app/lembretes': typeof AppLembretesRoute
+  '/app/painel': typeof AppPainelRoute
+  '/app/planilha': typeof AppPlanilhaRoute
   '/app/relatorios': typeof AppRelatoriosRoute
   '/app/': typeof AppIndexRoute
 }
@@ -122,24 +158,32 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/login'
+    | '/privacidade'
     | '/app/ajuda'
+    | '/app/avisos'
     | '/app/casas'
     | '/app/escanear'
     | '/app/estoque'
     | '/app/gastos'
     | '/app/lembretes'
+    | '/app/painel'
+    | '/app/planilha'
     | '/app/relatorios'
     | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
+    | '/privacidade'
     | '/app/ajuda'
+    | '/app/avisos'
     | '/app/casas'
     | '/app/escanear'
     | '/app/estoque'
     | '/app/gastos'
     | '/app/lembretes'
+    | '/app/painel'
+    | '/app/planilha'
     | '/app/relatorios'
     | '/app'
   id:
@@ -147,12 +191,16 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/login'
+    | '/privacidade'
     | '/app/ajuda'
+    | '/app/avisos'
     | '/app/casas'
     | '/app/escanear'
     | '/app/estoque'
     | '/app/gastos'
     | '/app/lembretes'
+    | '/app/painel'
+    | '/app/planilha'
     | '/app/relatorios'
     | '/app/'
   fileRoutesById: FileRoutesById
@@ -161,6 +209,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   LoginRoute: typeof LoginRoute
+  PrivacidadeRoute: typeof PrivacidadeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -186,6 +235,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/app/': {
       id: '/app/'
       path: '/'
@@ -198,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/ajuda'
       fullPath: '/app/ajuda'
       preLoaderRoute: typeof AppAjudaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/avisos': {
+      id: '/app/avisos'
+      path: '/avisos'
+      fullPath: '/app/avisos'
+      preLoaderRoute: typeof AppAvisosRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/casas': {
@@ -235,6 +298,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLembretesRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/painel': {
+      id: '/app/painel'
+      path: '/painel'
+      fullPath: '/app/painel'
+      preLoaderRoute: typeof AppPainelRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/planilha': {
+      id: '/app/planilha'
+      path: '/planilha'
+      fullPath: '/app/planilha'
+      preLoaderRoute: typeof AppPlanilhaRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/relatorios': {
       id: '/app/relatorios'
       path: '/relatorios'
@@ -247,22 +324,28 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppAjudaRoute: typeof AppAjudaRoute
+  AppAvisosRoute: typeof AppAvisosRoute
   AppCasasRoute: typeof AppCasasRoute
   AppEscanearRoute: typeof AppEscanearRoute
   AppEstoqueRoute: typeof AppEstoqueRoute
   AppGastosRoute: typeof AppGastosRoute
   AppLembretesRoute: typeof AppLembretesRoute
+  AppPainelRoute: typeof AppPainelRoute
+  AppPlanilhaRoute: typeof AppPlanilhaRoute
   AppRelatoriosRoute: typeof AppRelatoriosRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppAjudaRoute: AppAjudaRoute,
+  AppAvisosRoute: AppAvisosRoute,
   AppCasasRoute: AppCasasRoute,
   AppEscanearRoute: AppEscanearRoute,
   AppEstoqueRoute: AppEstoqueRoute,
   AppGastosRoute: AppGastosRoute,
   AppLembretesRoute: AppLembretesRoute,
+  AppPainelRoute: AppPainelRoute,
+  AppPlanilhaRoute: AppPlanilhaRoute,
   AppRelatoriosRoute: AppRelatoriosRoute,
   AppIndexRoute: AppIndexRoute,
 }
@@ -273,6 +356,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   LoginRoute: LoginRoute,
+  PrivacidadeRoute: PrivacidadeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
